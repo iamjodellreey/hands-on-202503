@@ -10,5 +10,5 @@ Experiment with:
 Part 2: Combining Playwright with Copilot for Automated Testing
 
 Experiment with:
-- Use Copilot to generate E2E test cases. (ongoing)
-- Compare AI-generated tests vs. manually written tests.
+- Use Copilot to generate E2E test cases. (done)
+- Compare AI-generated tests vs. manually written tests. (done)
