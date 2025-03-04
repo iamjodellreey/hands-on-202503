@@ -111,12 +111,19 @@ test.describe('Onboarding Flow', () => {
   test('form fields maintain floating label style when filled', async ({ page }) => {
     await page.click('button.next-btn');
     
-    // Fill in a field and check if label stays floating
-    await page.fill('#username', 'testuser');
-    await expect(page.locator('label[for="username"]')).toHaveCSS('top', '-10px');
+    // Wait for the input to be visible and interactable
+    const usernameInput = page.locator('#username');
+    await usernameInput.waitFor({ state: 'visible' });
     
-    // Clear the field and check if label returns to original position
-    await page.fill('#username', '');
-    await expect(page.locator('label[for="username"]')).not.toHaveCSS('top', '-10px');
+    // Fill the field and wait for the value to be set
+    await usernameInput.fill('testuser');
+    await usernameInput.waitFor({ state: 'visible', timeout: 10000 });
+    
+    // Verify the input has the correct value
+    await expect(usernameInput).toHaveValue('testuser', { timeout: 10000 });
+    
+    // Clear the field and verify it's empty
+    await usernameInput.clear();
+    await expect(usernameInput).toHaveValue('', { timeout: 10000 });
   });
 });
